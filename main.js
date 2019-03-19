@@ -4,25 +4,24 @@ const width = 100;
 
 const splitLines = (text, maxWidth) => {
   // TODO:
-  // - return array of string with max
+  // split text into words
+  // traverse words and add to a new string (forEach)
+  // - return array of strings with max
   // lenght of maxWidth
 };
 
 /*
   padFunction can be loadash pad, padStart and padEnd
 */
-
 const formatText = padFunction => (text, width) => {
   // TODO:
   // - split text into lines
   // - apply padFunction to each line (map)
-  // - and add breakline
   // - join lines to form text again
   // - return formated text
   return splitLines(text, width)
     .map(line => padFunction(line, width))
-    .map(appendBreakline)
-    .join();
+    .join("\n");
 };
 
 // Partial applications with already applied pad option
