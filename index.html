@@ -2,16 +2,33 @@
 <html>
 <body>
 
-<script src="main_css.js"></script> 
-Ingrese su texto: <input type="text" id="input_text">
-<br>
-Ancho: <input type="number" id="input_width" value=200> px
-<br>
-<input type="radio" name="alignment" value="left" checked> Izq.
-<input type="radio" name="alignment" value="center" > Centro
-<input type="radio" name="alignment" value="right"> Der.
-<br>
-<button type="button" onclick="applyChanges('input_text', 'alignment', 'input_width', 'output')">Actualizar</button>
-<p id="output">...</p>
+	Ingrese su texto: <input type="text" id="input_text">
+	<br>
+	Ancho: <input type="number" id="input_width" value=200> px
+	<br>
+	<input type="radio" name="alignment" value="left" checked> Izq.
+	<input type="radio" name="alignment" value="center" > Centro
+	<input type="radio" name="alignment" value="right"> Der.
+	<br>
+	<button type="button" onclick="applyChanges('input_text', 'alignment', 'input_width', 'output')">Actualizar</button>
+	<p id="output">...</p>
+
+	<script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+	<script>
+	// Loading `lodash.fp.js` converts `_` to its fp variant.
+	_.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+	// ➜ { 'a': 1, 'b': 2 }
+
+	// Use `noConflict` to restore the pre-fp variant.
+	var fp = _.noConflict();
+
+	_.defaults({ 'a': 1 }, { 'a': 2, 'b': 2 });
+	// ➜ { 'a': 1, 'b': 2 }
+	fp.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+	// ➜ { 'a': 1, 'b': 2 }
+	</script>
+
+	<script src="main.js"></script>
+
 </body>
 </html>
