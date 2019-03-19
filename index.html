@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="main.js"></script> 
+Ingrese su texto: <input type="text" id="input_text">
+<br>
+Ancho: <input type="number" id="input_width" value=200> px
+<br>
+<input type="radio" name="alignment" value="left" checked> Izq.
+<input type="radio" name="alignment" value="center" > Centro
+<input type="radio" name="alignment" value="right"> Der.
+<br>
+<button type="button" onclick="applyChanges('input_text', 'alignment', 'input_width', 'output')">Actualizar</button>
+<p id="output">...</p>
+</body>
+</html>
