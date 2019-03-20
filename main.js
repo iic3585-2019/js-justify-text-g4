@@ -2,12 +2,22 @@ const text =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu condimentum augue. Etiam neque neque, congue eget vehicula eget, molestie nec ligula. Integer a eros dapibus risus congue gravida. Morbi dapibus, dolor a volutpat blandit, sem tellus fringilla ante, ac imperdiet odio urna suscipit ipsum. Donec congue elementum feugiat.";
 const width = 100;
 
+
+
 const splitLines = (text, maxWidth) => {
   // TODO:
   // split text into words
   // traverse words and add to a new string (forEach)
   // - return array of strings with max
   // lenght of maxWidth
+  let texts = [];
+  while(text.length > width){
+    let i = text.lastIndexOf(" ", width-1);
+    let sub = text.substring(0 ,i-1);
+    text = text.substring(i+1);
+    texts.push(sub);
+  }
+  return texts;
 };
 
 /*
