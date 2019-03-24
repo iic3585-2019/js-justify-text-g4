@@ -6,6 +6,7 @@ const splitLines = (text, maxWidth) => {
     text = text.substring(i + 1);
     texts.push(sub);
   }
+  texts.push(sub);
   return texts;
 };
 
