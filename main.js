@@ -1,6 +1,6 @@
 const text =
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit, vestibulum risus mus ridiculus ornare enim, class a ut varius litora condimentum. Pharetra ut etiam nam erat aptent, dictumst urna euismod cum et, hendrerit luctus habitasse ultrices. Ligula ullamcorper eleifend porttitor ante fames metus lectus, et vel eu penatibus commodo tempor, elementum consequat sed etiam id purus. Vestibulum turpis quisque montes malesuada class ac ultrices aptent, donec tristique feugiat vehicula orci dapibus molestie dictum nec, porttitor aliquet quis mauris nostra justo sociosqu. Imperdiet conubia torquent non tristique arcu turpis, urna nisl facilisi praesent quam augue rhoncus, tincidunt at condimentum mi aliquet. Rhoncus interdum porttitor rutrum himenaeos tortor aenean habitant ultrices nascetur sociosqu class, risus a habitasse commodo primis lacus eleifend ullamcorper aptent.";
-const width = 100;
+  "Lorem ipsum dolor sit amet consectetur adipiscing elit, vestibulum risus mus ridiculus ornare enim, class a ut varius litora condimentum. Pharetra ut etiam nam erat aptent, dictumst urna euismod cum et, hendrerit luctus habitasse ultrices.";
+const width = 50;
 
 const splitLines = (text, maxWidth) => {
   let texts = [];
@@ -42,6 +42,9 @@ const formatCapitalizeCenter = formatText(capitalizeCenter);
 
 function main() {
   // Test our functions
+  console.log("INPUT TEXT:");
+  console.log(text);
+
   console.log("LEFT:");
   console.log(formatLeft(text, width));
   console.log("RIGHT:");
