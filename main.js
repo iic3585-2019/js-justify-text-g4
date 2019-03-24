@@ -1,11 +1,7 @@
-const text =
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit, vestibulum risus mus ridiculus ornare enim, class a ut varius litora condimentum. Pharetra ut etiam nam erat aptent, dictumst urna euismod cum et, hendrerit luctus habitasse ultrices.";
-const width = 50;
-
 const splitLines = (text, maxWidth) => {
   let texts = [];
-  while (text.length > width) {
-    let i = text.lastIndexOf(" ", width - 1);
+  while (text.length > maxWidth) {
+    let i = text.lastIndexOf(" ", maxWidth - 1);
     let sub = text.substring(0, i - 1);
     text = text.substring(i + 1);
     texts.push(sub);
@@ -13,50 +9,49 @@ const splitLines = (text, maxWidth) => {
   return texts;
 };
 
-/*
-  padFunction can be loadash pad, padStart and padEnd
-*/
 const formatText = formatFunction => (text, width) => {
   return splitLines(text, width)
     .map(line => formatFunction(line))
     .join("\n");
 };
 
-/* Currying pad functions*/
+/* Currying pad functions to fix the width in the scope */
 const padCurried = (padFunction, w) => line => padFunction(line, w);
 
-/* Function composition to create more complex format functions*/
-const capitalizeCenter = line => {
-  return padCurried(_.pad, width)(_.upperCase(line));
-};
-
-// Partial applications with already applied format function
-const formatLeft = formatText(padCurried(_.padEnd, width));
-const formatRight = formatText(padCurried(_.padStart, width));
-const formatCenter = formatText(padCurried(_.pad, width));
-
-const formatCapitalize = formatText(_.upperCase);
-
-// Now using a more complex function composed with capitalize and pad
-const formatCapitalizeCenter = formatText(capitalizeCenter);
+const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
 
 function main() {
-  // Test our functions
+  const text =
+    "Lorem ipsum dolor sit amet consectetur adipiscing elit, vestibulum risus mus ridiculus ornare enim, class a ut varius litora condimentum. Pharetra ut etiam nam erat aptent, dictumst urna euismod cum et, hendrerit luctus habitasse ultrices.";
+  const duck = 100;
+
+  /* Formatting options */
+  const formatLeft = padCurried(_.padEnd, duck);
+  const formatRight = padCurried(_.padStart, duck);
+  const formatCenter = padCurried(_.pad, duck);
+
+  const formatUpperCase = _.upperCase;
+  const formatUpperCenter = pipe(
+    formatUpperCase,
+    formatCenter
+  );
+
+  // Testing
   console.log("INPUT TEXT:");
   console.log(text);
 
   console.log("LEFT:");
-  console.log(formatLeft(text, width));
+  console.log(formatText(formatLeft)(text, duck));
   console.log("RIGHT:");
-  console.log(formatRight(text, width));
+  console.log(formatText(formatRight)(text, duck));
   console.log("CENTER:");
-  console.log(formatCenter(text, width));
+  console.log(formatText(formatCenter)(text, duck));
 
   console.log("CAPITALIZE:");
-  console.log(formatCapitalize(text, width));
+  console.log(formatText(formatUpperCase)(text, duck));
 
   console.log("CAPITALIZE CENTER:");
-  console.log(formatCapitalizeCenter(text, width));
+  console.log(formatText(formatUpperCenter)(text, duck));
 }
 
 main();
