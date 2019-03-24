@@ -1,11 +1,10 @@
 
 
-
 const splitLines = (text, maxWidth) => {
   let texts = [];
   while (text.length > maxWidth) {
     let i = text.lastIndexOf(" ", maxWidth - 1);
-    let sub = text.substring(0, i - 1);
+    let sub = text.substring(0, i);
     text = text.substring(i + 1);
     texts.push(sub);
   }
