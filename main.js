@@ -1,3 +1,6 @@
+
+
+
 const splitLines = (text, maxWidth) => {
   let texts = [];
   while (text.length > maxWidth) {
@@ -6,7 +9,7 @@ const splitLines = (text, maxWidth) => {
     text = text.substring(i + 1);
     texts.push(sub);
   }
-  texts.push(sub);
+  texts.push(text);
   return texts;
 };
 
