@@ -57,4 +57,51 @@ function main() {
   console.log(formatText(formatUpperCenter)(text, duck));
 }
 
-main();
+const grabMany = (string) => {
+  return document.getElementsByName(string);
+}
+
+const grabElement = (string) =>{
+  return document.getElementById(string);
+}
+
+const applyChanges = () => {
+
+  const text = grabElement('input_text').value;
+  const width = grabElement('input_width').value;
+  
+  const formatLeft = padCurried(_.padEnd, width);
+  const formatRight = padCurried(_.padStart, width);
+  const formatCenter = padCurried(_.pad, width);
+
+  const formatUpperCase = _.upperCase;
+  const formatUpperCenter = pipe(
+    formatUpperCase,
+    formatCenter
+  );
+
+  const selector = (string, upper) => {
+    if(string == "center") {
+      if(upper == true) {
+        return formatText(formatUpperCenter);
+      }
+      return formatText(formatCenter);
+    }
+    if(string == "right") {
+      return formatText(formatRight);
+    }
+    if(string == "left") {
+      return formatText(formatLeft);
+    }
+  }
+  
+  let source = grabElement('output');
+  
+  
+  const radios = grabMany('alignment');
+  const upper = grabElement('upper').checked;
+  
+  const alignment = Array.from(radios).filter(r => r.checked)[0].value;
+  console.log(selector(alignment, upper)(text, width));
+  source.innerHTML = selector(alignment, upper)(text, width);
+}
