@@ -7,13 +7,13 @@ Permite realizar las siguientes transformaciones a un texto ingresado como input
 
 ## Versiones de archivos
 
-Existen dos versiones de este ejercicio. La primera es una aproximación funcional, mientras que la segunda, aunque mantiene elementos de la versión funcional, realiza modificaciones al css para simplificar el código.
-Para probar el código en forma local basta con abrir el archivo HTML.
-
+Existen tres versiones de este ejercicio. Las primeras dos son aproximaciones funcionales, mientras que la tercera, aunque mantiene elementos de la versión funcional, realiza modificaciones al css para simplificar el código.
 
 ### Versión funcional pura
 Esta es la versión más funcional. Para probarla se debe abrir el archivo index.html y revisar la consola.
 Utiliza la librería Lodash para efectuar los cambios. Sus archivos son index.html y main.js
+
+Se puede revisar [aquí](https://iic3585-2019.github.io/js-justify-text-g4/index.html)
 
 ### Versión funcional
 Esta es la versión más funcional, aunque no todas las funciones usadas son puras, ya que obtine los valores del index.
