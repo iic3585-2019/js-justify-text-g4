@@ -75,33 +75,55 @@ const applyChanges = () => {
   const formatCenter = padCurried(_.pad, width);
 
   const formatUpperCase = _.upperCase;
+  const formatLowerCase = _.lowerCase;
+  const formatCapitalCase = _.capitalize;
+
+  const formatReverse = string => string.split('').reverse().join('') 
+
   const formatUpperCenter = pipe(
     formatUpperCase,
     formatCenter
   );
 
-  const selector = (string, upper) => {
+  const selector = (string, format, reverse) => {
+    let array = []
+    if (format == "upper") {
+      array.push(formatUpperCase);
+    }
+    if (format == "lower") {
+      array.push(formatLowerCase);
+    }
+    if (format == "capitalize") {
+      array.push(formatCapitalCase);
+    }
     if(string == "center") {
-      if(upper == true) {
-        return formatText(formatUpperCenter);
-      }
-      return formatText(formatCenter);
+      array.push(formatCenter);
     }
     if(string == "right") {
-      return formatText(formatRight);
+      array.push(formatRight);
     }
     if(string == "left") {
-      return formatText(formatLeft);
+      array.push(formatLeft);
     }
+    console.log('here');
+    console.log(array);
+
+    if (reverse) {
+      array.push(formatReverse)
+    }
+    
+    return formatText(pipe(...array));
   }
   
   let source = grabElement('output');
   
   
   const radios = grabMany('alignment');
-  const upper = grabElement('upper').checked;
+  const radios2 = grabMany('format');
+  const reversed = grabElement('reverse').checked;
   
   const alignment = Array.from(radios).filter(r => r.checked)[0].value;
-  console.log(selector(alignment, upper)(text, width));
-  source.innerHTML = selector(alignment, upper)(text, width);
+  const format = Array.from(radios2).filter(r => r.checked)[0].value;
+  // console.log(selector(alignment, upper)(text, width));
+  source.innerHTML = selector(alignment, format, reversed)(text, width);
 }
