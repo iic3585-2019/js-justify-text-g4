@@ -7,13 +7,19 @@
 
 	Ingrese su texto: <input type="text" id="input_text">
 	<br>
-	Mayus: <input type="checkbox" id="upper">
+	Formato: 
+	<input type="radio" name="format" value="normal" checked> Normal.
+	<input type="radio" name="format" value="upper"> Mayúsculas
+	<input type="radio" name="format" value="lower"> Minúsculas
+	<input type="radio" name="format" value="capitalize"> Capitalizar
 	<br>
 	Ancho: <input type="number" id="input_width" value=200> caracteres por línea
 	<br>
 	<input type="radio" name="alignment" value="left" checked> Izq.
 	<input type="radio" name="alignment" value="center" > Centro
 	<input type="radio" name="alignment" value="right"> Der.
+	<br>
+	Invertir?:  <input type="checkbox" id="reverse">
 	<br>
 	<button type="button" onclick="applyChanges()">Actualizar</button>
 	<p style="white-space: pre-wrap" id="output">...</p>
