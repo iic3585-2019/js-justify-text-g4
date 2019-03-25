@@ -21,39 +21,6 @@ const padCurried = (padFunction, w) => line => padFunction(line, w);
 
 const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
 
-function main() {
-  const text =
-    "Lorem ipsum dolor sit amet consectetur adipiscing elit, vestibulum risus mus ridiculus ornare enim, class a ut varius litora condimentum. Pharetra ut etiam nam erat aptent, dictumst urna euismod cum et, hendrerit luctus habitasse ultrices.";
-  const duck = 100;
-
-  /* Formatting options */
-  const formatLeft = padCurried(_.padEnd, duck);
-  const formatRight = padCurried(_.padStart, duck);
-  const formatCenter = padCurried(_.pad, duck);
-
-  const formatUpperCase = _.upperCase;
-  const formatUpperCenter = pipe(
-    formatUpperCase,
-    formatCenter
-  );
-
-  // Testing
-  console.log("INPUT TEXT:");
-  console.log(text);
-
-  console.log("LEFT:");
-  console.log(formatText(formatLeft)(text, duck));
-  console.log("RIGHT:");
-  console.log(formatText(formatRight)(text, duck));
-  console.log("CENTER:");
-  console.log(formatText(formatCenter)(text, duck));
-
-  console.log("CAPITALIZE:");
-  console.log(formatText(formatUpperCase)(text, duck));
-
-  console.log("CAPITALIZE CENTER:");
-  console.log(formatText(formatUpperCenter)(text, duck));
-}
 
 const grabMany = (string) => {
   return document.getElementsByName(string);
@@ -94,8 +61,11 @@ const applyChanges = () => {
   }
 
   let source = grabElement('output');
+
+
   const radios = grabMany('alignment');
   const upper = grabElement('upper').checked;
+
   const alignment = Array.from(radios).filter(r => r.checked)[0].value;
   console.log(selector(alignment, upper)(text, width));
   source.innerHTML = selector(alignment, upper)(text, width);
