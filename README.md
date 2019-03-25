@@ -18,4 +18,5 @@ Se puede revisar [aquí](https://iic3585-2019.github.io/js-justify-text-g4/index
 
 ### Versión por css
 Realiza modificaciones al estilo (css) del output para transformar el texto. Sus archivos son index_css.html y main_css.js
+
 Se puede revisar [aquí](https://iic3585-2019.github.io/js-justify-text-g4/index_css.html)
