@@ -1,39 +1,36 @@
-function applyChanges(name, alignment, width, dest){
-  renderText(dest, name);
-  const source = grabElement(dest);
-  const e = setWidth(changeAlignment(source, alignment), width);
-  source.style.width = e.style.width;
-  source.style.textAlign = e.style.textAlign;
-}
-
-function grabElement(string){
+/* Auxiliar functions to get the elements we need */
+const grabElement = (string) =>{
   return document.getElementById(string);
 }
 
-function grabMany(string){
+const grabMany = (string) => {
   return document.getElementsByName(string);
 }
 
-function setWidth(e, number) {
-  const element = e.cloneNode(false);
-  const n = grabElement(number).value;
-  element.style.width = n.toString()+'px';
-  return element;
+/* Auxiliar functions that returns the values we will apply to the text */
+const setWidth = () => {
+  return grabElement('input_width').value.toString() +'px';
 }
 
-function changeAlignment(e, string) {
-  const element = e.cloneNode(false);
-  const radios = grabMany(string);
-  const s = Array.from(radios).filter(r => r.checked)[0].value;
+const setAlign = () => {
+  const radios = grabMany('alignment');
+  return Array.from(radios).filter(r => r.checked)[0].value;
+}
 
-  if (s == 'left' || s == 'right' || s == 'center' || s == 'justify') {
-    element.style.textAlign = s;
+const setTextTransform = () => {
+  const radios = grabMany('format');
+  return Array.from(radios).filter(r => r.checked)[0].value;
+}
+
+/* Main function that apply the changes to the text */
+const applyChanges = () => {
+  let source = grabElement('output');
+  source.innerHTML = grabElement('input_text').value;
+  source.style.width = setWidth();
+  source.style.textAlign = setAlign();
+  source.style.textTransform = setTextTransform();
+  if (grabElement('reverse').checked) {
+    source.style.direction = "rtl";
+    source.style.unicodeBidi = "bidi-override";
   }
-
-  return element;
-
-}
-
-function renderText(dest, source){
-  grabElement(dest).innerHTML = grabElement(source).value;
 }

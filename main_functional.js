@@ -1,3 +1,13 @@
+/* Auxiliar functions to get the elements */
+const grabMany = (string) => {
+  return document.getElementsByName(string);
+}
+
+const grabElement = (string) =>{
+  return document.getElementById(string);
+}
+
+/* Auxiliar functions to format the text */
 const splitLines = (text, maxWidth) => {
   let texts = [];
   while (text.length > maxWidth) {
@@ -16,57 +26,65 @@ const formatText = formatFunction => (text, width) => {
     .join("\n");
 };
 
+const formatReverse = string => string.split('').reverse().join('');
+
 /* Currying pad functions to fix the width in the scope */
 const padCurried = (padFunction, w) => line => padFunction(line, w);
 
+/* Pipe the changes */
 const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
 
+/* Function that gets the values and format the text */
+const selector = (string, format, reverse, width) => {
+  let array = [];
 
-const grabMany = (string) => {
-  return document.getElementsByName(string);
-}
-
-const grabElement = (string) =>{
-  return document.getElementById(string);
-}
-
-const applyChanges = () => {
-
-  const text = grabElement('input_text').value;
-  const width = grabElement('input_width').value;
+  const formatUpperCase = _.upperCase;
+  const formatLowerCase = _.lowerCase;
+  const formatCapitalCase = _.capitalize;
 
   const formatLeft = padCurried(_.padEnd, width);
   const formatRight = padCurried(_.padStart, width);
   const formatCenter = padCurried(_.pad, width);
 
-  const formatUpperCase = _.upperCase;
-  const formatUpperCenter = pipe(
-    formatUpperCase,
-    formatCenter
-  );
-
-  const selector = (string, upper) => {
-    if(string == "center") {
-      if(upper == true) {
-        return formatText(formatUpperCenter);
-      }
-      return formatText(formatCenter);
-    }
-    if(string == "right") {
-      return formatText(formatRight);
-    }
-    if(string == "left") {
-      return formatText(formatLeft);
-    }
+  if (reverse) {
+    array.push(formatReverse)
   }
+  if (format == "upper") {
+    array.push(formatUpperCase);
+  }
+  if (format == "lower") {
+    array.push(formatLowerCase);
+  }
+  if (format == "capitalize") {
+    array.push(formatCapitalCase);
+  }
+  if(string == "center") {
+    array.push(formatCenter);
+  }
+  if(string == "right") {
+    array.push(formatRight);
+  }
+  if(string == "left") {
+    array.push(formatLeft);
+  }
+  return formatText(pipe(...array));
+}
 
+/* Main function, called from the website */
+const applyChanges = () => {
+
+  /* Input and output elements */
+  const text = grabElement('input_text').value;
   let source = grabElement('output');
 
+  /* Values selected */
+  const width = grabElement('input_width').value;
+  const aling_radios = grabMany('alignment');
+  const alignment = Array.from(aling_radios).filter(r => r.checked)[0].value;
+  const format_radios = grabMany('format');
+  const format = Array.from(format_radios).filter(r => r.checked)[0].value;
+  const reversed = grabElement('reverse').checked;
 
-  const radios = grabMany('alignment');
-  const upper = grabElement('upper').checked;
-
-  const alignment = Array.from(radios).filter(r => r.checked)[0].value;
-  console.log(selector(alignment, upper)(text, width));
-  source.innerHTML = selector(alignment, upper)(text, width);
+  /* Apply changes to the output */
+  source.innerHTML = selector(alignment, format, reversed, width)(text, width);
 }

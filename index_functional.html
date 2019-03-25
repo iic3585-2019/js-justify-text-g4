@@ -1,45 +1,41 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="UTF-8">
-</head> 
 <html>
-<body>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+  	Ingrese su texto: <input type="text" id="input_text">
+  	<br>
+  	Formato:
+  	<input type="radio" name="format" value="normal" checked> Normal.
+  	<input type="radio" name="format" value="upper"> Mayúsculas
+  	<input type="radio" name="format" value="lower"> Minúsculas
+  	<input type="radio" name="format" value="capitalize"> Capitalizar
+  	<br>
+  	Ancho: <input type="number" id="input_width" value=200> caracteres por línea
+  	<br>
+  	<input type="radio" name="alignment" value="left" checked> Izq.
+  	<input type="radio" name="alignment" value="center" > Centro
+  	<input type="radio" name="alignment" value="right"> Der.
+  	<br>
+  	Invertir?:  <input type="checkbox" id="reverse">
+  	<br>
+  	<button type="button" onclick="applyChanges()">Actualizar</button>
+  	<p style="white-space: pre-wrap" id="output">...</p>
+    <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+    <script>
+    // Loading `lodash.fp.js` converts `_` to its fp variant.
+    _.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+    // ➜ { 'a': 1, 'b': 2 }
 
-	Ingrese su texto: <input type="text" id="input_text">
-	<br>
-	Formato: 
-	<input type="radio" name="format" value="normal" checked> Normal.
-	<input type="radio" name="format" value="upper"> Mayúsculas
-	<input type="radio" name="format" value="lower"> Minúsculas
-	<input type="radio" name="format" value="capitalize"> Capitalizar
-	<br>
-	Ancho: <input type="number" id="input_width" value=200> caracteres por línea
-	<br>
-	<input type="radio" name="alignment" value="left" checked> Izq.
-	<input type="radio" name="alignment" value="center" > Centro
-	<input type="radio" name="alignment" value="right"> Der.
-	<br>
-	Invertir?:  <input type="checkbox" id="reverse">
-	<br>
-	<button type="button" onclick="applyChanges()">Actualizar</button>
-	<p style="white-space: pre-wrap" id="output">...</p>
+    // Use `noConflict` to restore the pre-fp variant.
+    var fp = _.noConflict();
 
-	<script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
-	<script>
-	// Loading `lodash.fp.js` converts `_` to its fp variant.
-	_.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
-	// ➜ { 'a': 1, 'b': 2 }
-
-	// Use `noConflict` to restore the pre-fp variant.
-	var fp = _.noConflict();
-
-	_.defaults({ 'a': 1 }, { 'a': 2, 'b': 2 });
-	// ➜ { 'a': 1, 'b': 2 }
-	fp.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
-	// ➜ { 'a': 1, 'b': 2 }
-	</script>
-
-	<script src="main.js"></script>
-
-</body>
+    _.defaults({ 'a': 1 }, { 'a': 2, 'b': 2 });
+    // ➜ { 'a': 1, 'b': 2 }
+    fp.defaults({ 'a': 2, 'b': 2 })({ 'a': 1 });
+    // ➜ { 'a': 1, 'b': 2 }
+    </script>
+    <script src="main_functional.js"></script>
+  </body>
 </html>

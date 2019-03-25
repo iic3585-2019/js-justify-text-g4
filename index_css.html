@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		Ingrese su texto: <input type="text" id="input_text">
+		<br>
+		Formato:
+		<input type="radio" name="format" value="none" checked> Normal.
+		<input type="radio" name="format" value="uppercase"> Mayúsculas
+		<input type="radio" name="format" value="lowercase"> Minúsculas
+		<input type="radio" name="format" value="capitalize"> Capitalizar
+		<br>
+		Ancho: <input type="number" id="input_width" value=200> px
+		<br>
+		<input type="radio" name="alignment" value="left" checked> Izq.
+		<input type="radio" name="alignment" value="center" > Centro
+		<input type="radio" name="alignment" value="right"> Der.
+		<br>
+		Invertir?:  <input type="checkbox" id="reverse">
+		<br>
+		<button type="button" onclick="applyChanges()">Actualizar</button>
+		<p id="output">...</p>
+		
+		<script src="main_css.js"></script>
+	</body>
+</html>
