@@ -22,6 +22,11 @@ const setTextTransform = () => {
   return Array.from(radios).filter(r => r.checked)[0].value;
 }
 
+const setDirection = () => {
+  if (grabElement('reverse').checked) return "rtl";
+  else return "ltr";
+}
+
 /* Main function that apply the changes to the text */
 const applyChanges = () => {
   let source = grabElement('output');
@@ -29,8 +34,6 @@ const applyChanges = () => {
   source.style.width = setWidth();
   source.style.textAlign = setAlign();
   source.style.textTransform = setTextTransform();
-  if (grabElement('reverse').checked) {
-    source.style.direction = "rtl";
-    source.style.unicodeBidi = "bidi-override";
-  }
+  source.style.unicodeBidi = "bidi-override";
+  source.style.direction = setDirection();
 }
