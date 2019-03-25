@@ -87,6 +87,9 @@ const applyChanges = () => {
 
   const selector = (string, format, reverse) => {
     let array = []
+    if (reverse) {
+      array.push(formatReverse)
+    }
     if (format == "upper") {
       array.push(formatUpperCase);
     }
@@ -105,13 +108,6 @@ const applyChanges = () => {
     if(string == "left") {
       array.push(formatLeft);
     }
-    console.log('here');
-    console.log(array);
-
-    if (reverse) {
-      array.push(formatReverse)
-    }
-    
     return formatText(pipe(...array));
   }
   
